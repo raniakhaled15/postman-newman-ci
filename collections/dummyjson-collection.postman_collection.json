@@ -1,0 +1,977 @@
+{
+  "info": {
+    "_postman_id": "4624e345-fc98-4384-b062-9a43675ba8f9",
+    "name": "DummyJSON API Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49835517",
+    "_collection_link": "https://go.postman.co/collection/49835517-4624e345-fc98-4384-b062-9a43675ba8f9?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "get posts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test status code is 200', function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(200)\r",
+                  "}); \r",
+                  "pm.test(\"test if response equal ok\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/posts",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get comments on a post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test status code is 200', function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(200)\r",
+                  "}); \r",
+                  "pm.test(\"test if response equal ok\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/posts/{{postID}}/comments",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts",
+                "{{postID}}",
+                "comments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get posts by keyword",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test response has the correct keyword', function(){\r",
+                  "    const keyword = decodeURIComponent(pm.request.url.query.get(\"q\"));\r",
+                  "    pm.expect(pm.response.json().posts[0].body).to.include(keyword);\r",
+                  "})\r",
+                  "pm.test('test status code is 200', function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(200)\r",
+                  "}); \r",
+                  "pm.test(\"test if response equal ok\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/posts/search?q=love ",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "love "
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get post by ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Response body contains the correct post ID\", function () {\r",
+                  "    const expectedId = parseInt(pm.environment.get(\"postID\"));\r",
+                  "    pm.expect(pm.response.json().id).to.eql(expectedId);\r",
+                  "});\r",
+                  "pm.test('test status code is 200', function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(200)\r",
+                  "}); \r",
+                  "pm.test(\"test if response equal ok\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/posts/{{postID}}",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts",
+                "{{postID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "pm.test('test response body has id and userId', function () {\r",
+                  "    pm.response.to.have.jsonBody('id');\r",
+                  "    pm.response.to.have.jsonBody('userId');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"test if response equal created\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"Created\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\r\n    \"userId\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/posts/add",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('updated post title is correct', function () {",
+                  "    const requesttitle = JSON.parse(pm.request.body.raw).title; // Get the title from the request body",
+                  "    pm.expect(pm.response.json().title).to.eql(requesttitle);",
+                  "});",
+                  "pm.test('updated post body is correct', function () {",
+                  "    const requestbody = JSON.parse(pm.request.body.raw); // Get the body from the request body",
+                  "    pm.expect(pm.response.json()).to.contain(requestbody);",
+                  "});",
+                  "pm.test('test response status code', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"test if response equal ok\", function () {",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");",
+                  "})",
+                  "pm.test(\"test if response time less than 1.5s\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);",
+                  "})",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);",
+                  "})",
+                  "pm.test(\"test headers have date \", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;",
+                  "})",
+                  "pm.test(\"test headers have content-type \", function () {",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": 123, \"body\": true\r\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/posts/{{postID}}",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts",
+                "{{postID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get paginated posts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal OK\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "const limit = parseInt(decodeURIComponent(pm.request.url.query.get(\"limit\")));\r",
+                  "pm.test('test skip and limit match parameters', function () {\r",
+                  "    const skip = decodeURIComponent(pm.request.url.query.get(\"skip\"));\r",
+                  "    pm.expect(pm.response.json().skip).to.equal(parseInt(skip));\r",
+                  "    pm.expect(pm.response.json().limit).to.equal(limit);\r",
+                  "})\r",
+                  "pm.test('test if response has exact limit numbers of posts', function () {\r",
+                  "    pm.expect(pm.response.json().posts.length).to.equal(limit);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/posts?limit=5&skip=0",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "5"
+                },
+                {
+                  "key": "skip",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete post",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test if post is deleted', function () {\r",
+                  "    pm.expect(pm.response.json().isDeleted).to.eql(true);\r",
+                  "});\r",
+                  "pm.test('test if post id is correct', function () {\r",
+                  "    pm.expect(pm.response.json().id).to.be.equal(parseInt(pm.environment.get(\"postID\")));\r",
+                  "});\r",
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal OK\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/posts/{{postID}}",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "posts",
+                "{{postID}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "get users",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test status code is 200', function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(200)\r",
+                  "}); \r",
+                  "pm.test(\"test if response equal ok\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 50k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(50000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BaseURL}}/users",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create new user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal created\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"Created\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "pm.test('test response body has id', function () {\r",
+                  "    pm.response.to.have.jsonBody('id');\r",
+                  "});\r",
+                  "pm.test('test response body has the correct data', function () {\r",
+                  "    const jsonResponseBody = pm.response.json();\r",
+                  "    const jsonRequestBody = JSON.parse(pm.request.body.raw);\r",
+                  "    pm.expect(pm.response.json()).to.contain(jsonRequestBody)\r",
+                  "    // pm.expect(jsonResponseBody.firstName).to.eql(jsonRequestBody.firstName);\r",
+                  "    // pm.expect(jsonResponseBody.lastName).to.eql(jsonRequestBody.lastName);\r",
+                  "    // pm.expect(jsonResponseBody.maidenName).to.eql(jsonRequestBody.maidenName);\r",
+                  "    // pm.expect(jsonResponseBody.age).to.eql(jsonRequestBody.age);\r",
+                  "    // pm.expect(jsonResponseBody.gender).to.eql(jsonRequestBody.gender);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\",\r\n        \"maidenName\": \"Smith\",\r\n        \"age\": 30,\r\n        \"gender\": \"male\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/users/add",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "users",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal created\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "pm.test('test response body has id', function () {\r",
+                  "    pm.response.to.have.jsonBody('id');\r",
+                  "});\r",
+                  "pm.test('test response body has the correct data', function () {\r",
+                  "    const jsonResponseBody = pm.response.json();\r",
+                  "    const jsonRequestBody = JSON.parse(pm.request.body.raw);\r",
+                  "    pm.expect(pm.response.json()).to.contain(jsonRequestBody)\r",
+                  "    // pm.expect(jsonResponseBody.firstName).to.eql(jsonRequestBody.firstName);\r",
+                  "    // pm.expect(jsonResponseBody.lastName).to.eql(jsonRequestBody.lastName);\r",
+                  "    // pm.expect(jsonResponseBody.maidenName).to.eql(jsonRequestBody.maidenName);\r",
+                  "    // pm.expect(jsonResponseBody.age).to.eql(jsonRequestBody.age);\r",
+                  "    // pm.expect(jsonResponseBody.gender).to.eql(jsonRequestBody.gender);\r",
+                  "});\r",
+                  "pm.test('test if first name is updated correctly', function(){\r",
+                  "    pm.expect(pm.response.json().firstName).to.eql(\"Rania\");\r",
+                  "});\r",
+                  "pm.test('test if user id in response match the id in request', function(){\r",
+                  "    pm.expect(pm.response.json().id).to.eql(parseInt(pm.environment.get('userID')));\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\":\"Rania\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/users/{{userID}}",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "users",
+                "{{userID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete user",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal created\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})\r",
+                  "pm.test('test response body has id', function () {\r",
+                  "    pm.response.to.have.jsonBody('id');\r",
+                  "});\r",
+                  "pm.test('test if user id in response match the id in request', function () {\r",
+                  "    pm.expect(pm.response.json().id).to.eql(parseInt(pm.environment.get('userID')));\r",
+                  "})\r",
+                  "pm.test('test if user is deleted', function () {\r",
+                  "    pm.expect(pm.response.json().isDeleted).to.eql(true);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"firstName\":\"Rania\"}"
+            },
+            "url": {
+              "raw": "{{BaseURL}}/users/{{userID}}",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "users",
+                "{{userID}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "valid auth request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Login successful\", () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Token exists\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "    pm.expect(json).to.have.property(\"accessToken\");\r",
+                  "    pm.environment.set(\"token\", json.accessToken);\r",
+                  "});\r",
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal created\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"emilys\",\r\n  \"password\": \"emilyspass\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/auth/login",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "invalid auth request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Login is unsuccessful\", () => {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"test if response is Bad Request\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"Bad Request\");\r",
+                  "})\r",
+                  "pm.test(\"test if response body contains 'Invalid credentials'\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"Invalid credentials\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"emilys\",\r\n  \"password\": \"emilys\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/auth/login",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "auth request Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Login successful\", () => {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Token exists\", () => {\r",
+                  "    const json = pm.response.json();\r",
+                  "    pm.expect(json).to.have.property(\"accessToken\");\r",
+                  "    pm.environment.set(\"token\", json.accessToken);\r",
+                  "});\r",
+                  "pm.test('test response status code', function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"test if response equal created\", function () {\r",
+                  "    pm.expect(pm.response.status).to.be.equal(\"OK\");\r",
+                  "})\r",
+                  "pm.test(\"test if response time less than 1.5s\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1500);\r",
+                  "})\r",
+                  "pm.test(\"test if response size <= 20k bytes\", function () {\r",
+                  "    pm.expect(pm.response.responseSize).to.be.below(20000);\r",
+                  "})\r",
+                  "pm.test(\"test headers have date \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Date\")).to.be.a(\"string\").and.not.empty;\r",
+                  "})\r",
+                  "pm.test(\"test headers have content-type \", function () {\r",
+                  "    pm.expect(pm.response.headers.get(\"Content-Type\")).to.equal(\"application/json; charset=utf-8\");\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"emilys\",\r\n  \"password\": \"emilyspass\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BaseURL}}/auth/login",
+              "host": [
+                "{{BaseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

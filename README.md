@@ -29,6 +29,7 @@ DummyJSON API Tests
 ├── Posts
 │   ├── GET all posts
 │   ├── GET single post
+|   ├── GET search posts with keyword - valid query
 │   ├── GET post - invalid ID
 │   ├── GET post - non-existent ID
 │   ├── POST create post
@@ -44,14 +45,7 @@ DummyJSON API Tests
 │
 ├── Auth
 │   ├── POST login - valid credentials
-│   ├── POST login - wrong password
-│   └── POST login - missing fields
-│
-└── Search
-    ├── GET search posts - valid query
-    ├── GET search posts - empty query
-    ├── GET search users - valid query
-    └── GET search users - empty query
+
 ```
 
 ---

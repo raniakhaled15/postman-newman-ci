@@ -78,10 +78,6 @@ Variables used across the collection:
 | `baseUrl` | Base URL of the API |
 | `postId` | ID used for single post requests |
 | `userId` | ID used for single user requests |
-| `randomTitle` | Dynamically generated post title |
-| `randomBody` | Dynamically generated post body |
-| `randomUsername` | Dynamically generated username |
-| `randomEmail` | Dynamically generated email address |
 
 ---
 
